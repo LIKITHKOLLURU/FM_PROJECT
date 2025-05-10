@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/freelance_marketplace
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+jwt:
+  secret: your-secret-key
+  expiration: 86400000 # 24 hours
+
+server:
+  port: 8080
