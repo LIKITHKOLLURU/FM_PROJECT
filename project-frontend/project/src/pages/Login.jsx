@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../store/slices/authSlice';
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  const [errorMessage, setErrorMessage] = useState(''); // To store error messages if login fails
-  const navigate = useNavigate(); // Used for redirection after login success
+  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,11 +27,15 @@ function Login() {
       if (response.ok) {
         const loggedInUser = await response.json();
         console.log('Logged in user:', loggedInUser);
-        // Redirect to a new page (e.g., dashboard) after successful login
+
+        // Store user in Redux store
+        dispatch(loginSuccess(loggedInUser));
+
+        // Navigate based on role or just go to /jobs
         navigate('/jobs');
       } else {
         const error = await response.text();
-        setErrorMessage(error); // Set error message for failed login
+        setErrorMessage(error);
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -48,9 +55,10 @@ function Login() {
     <div className="max-w-md mx-auto">
       <div className="card">
         <h1 className="text-2xl font-bold text-center mb-8">Welcome Back</h1>
-        
-        {/* Display error message if login fails */}
-        {errorMessage && <p className="text-red-600 text-center">{errorMessage}</p>}
+
+        {errorMessage && (
+          <p className="text-red-600 text-center mb-4">{errorMessage}</p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

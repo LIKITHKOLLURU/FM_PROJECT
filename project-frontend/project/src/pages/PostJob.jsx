@@ -15,22 +15,6 @@ function PostJob() {
     projectType: 'fixed',
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    toast.promise(
-      new Promise((resolve) => setTimeout(resolve, 1500)),
-      {
-        loading: 'Posting your job...',
-        success: () => {
-          navigate('/jobs');
-          return 'Job posted successfully!';
-        },
-        error: 'Error posting job.',
-      }
-    );
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -39,10 +23,40 @@ function PostJob() {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:8080/api/jobs/addjob', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+
+
+      if (response.ok) {
+        toast.success('Job posted successfully!');
+        // Assuming you have a method to refresh the jobs list or navigate to the jobs page
+        navigate('/jobs'); // Or you can trigger the jobs fetching again via context or state
+      } else {
+        const errorText = await response.text();
+        toast.error(`Failed to post job: ${errorText}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Something went wrong. Please try again.');
+    }
+  };
+
+
   return (
     <div className="max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-8">Post a New Job</h1>
-      
+
       <div className="card">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

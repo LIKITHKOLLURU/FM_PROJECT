@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Footer from '../components/Footer'; // Ensure the path to Footer is correct
+import TopFreelancersSection from '../components/Freelancers';
 
 function Home() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Home() {
             Find Work
           </button>
           <button
-            onClick={() => handleNavigation('/post-job')}
+            onClick={() => handleNavigation('/freelancers')} // Navigate to '/freelancers'
             className="border-2 border-white text-white hover:bg-white hover:text-black btn-primary px-6 py-2 rounded bg-transparent"
           >
             Hire Freelancers
@@ -58,6 +59,9 @@ function Home() {
           </p>
         </div>
       </section>
+
+      {/* Top Freelancers Section */}
+      <TopFreelancersSection />
 
       {/* Why Choose Us Section */}
       <WhyChooseUs />

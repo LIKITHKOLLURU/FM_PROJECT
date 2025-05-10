@@ -8,6 +8,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PostJob from './pages/PostJob';
 import PrivateRoute from './components/PrivateRoute';
+import UserProfile from './pages/UserProfile';
+import Freelancers from './pages/Freelancers';
+import Dashboard from './pages/Dashboard';
+import Settings from './pages/Settings';
 
 function App() {
   const { isAuthenticated, role } = useSelector(state => state.auth);
@@ -20,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<Jobs />} />
+            <Route path="/profile/:id" element={<UserProfile />} />
             <Route 
               path="/profile" 
               element={
@@ -30,14 +35,19 @@ function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route 
-              path="/post-job" 
+            <Route path="/freelancers" element={<Freelancers />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/settings" element={<Settings />} />
+
+            <Route
+              path="/post-job"
               element={
                 <PrivateRoute roles={['client']}>
-                  <jobs />
+                  <PostJob />
                 </PrivateRoute>
-              } 
+              }
             />
+
           </Routes>
         </main>
       </div>

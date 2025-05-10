@@ -1,5 +1,4 @@
 import React from 'react';
-// import './Footer.css'; // You might not need a separate CSS file with Tailwind
 import { FaInstagram, FaWhatsapp, FaFacebook, FaTwitter, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
@@ -9,7 +8,7 @@ const Footer = () => {
 
                 {/* Brand Info */}
                 <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">FlexWork</h4>
+                    <h4 className="text-lg font-semibold text-white mb-2">Freelancer Marketplace</h4>
                     <p className="mb-4">
                         Connect with top freelancers and clients for your next project.
                         FlexWork makes it easy to find work or hire talent.
@@ -37,6 +36,7 @@ const Footer = () => {
                 <div>
                     <h4 className="text-lg font-semibold text-white mb-2">Quick Links</h4>
                     <ul className="space-y-1">
+                        <li><a href="/dashboard" className="hover:text-white">Dashboard</a></li>
                         <li><a href="/" className="hover:text-white">Home</a></li>
                         <li><a href="/jobs" className="hover:text-white">Find Jobs</a></li>
                         <li><a href="/freelancers" className="hover:text-white">Find Freelancers</a></li>
@@ -60,9 +60,9 @@ const Footer = () => {
                 {/* Contact Info */}
                 <div>
                     <h4 className="text-lg font-semibold text-white mb-2">Contact Us</h4>
-                    <p><em>123 Main Street,</em><br /><em>San Francisco, CA 94105</em></p>
-                    <p className="mt-2">(123) 456-7890</p>
-                    <p>info@flexwork.com</p>
+                    <p><em>KL University,</em><br /><em>India, Andhrapradesh.</em></p>
+                    <p className="mt-2">(+91) 9494333642</p>
+                    <p>2300031752@kluniversity.in</p>
                 </div>
             </div>
 

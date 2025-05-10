@@ -1,15 +1,20 @@
-import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-function PrivateRoute({ children, roles }) {
-  const { isAuthenticated, role } = useSelector(state => state.auth);
+/**
+ * PrivateRoute component that restricts access based on authentication and roles.
+ * @param {ReactNode} children - The protected component.
+ * @param {string[]} roles - (Optional) Allowed roles to access the route.
+ */
+function PrivateRoute({ children, roles = [] }) {
+  const { isAuthenticated, role } = useSelector((state) => state.auth);
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
-  if (roles && !roles.includes(role)) {
-    return <Navigate to="/" />;
+  if (roles.length > 0 && !roles.includes(role)) {
+    return <Navigate to="/" replace />;
   }
 
   return children;
