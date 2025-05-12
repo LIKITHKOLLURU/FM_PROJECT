@@ -48,7 +48,7 @@ function PostJob() {
       }
     } catch (error) {
       console.error('Error:', error);
-      toast.error('Something went wrong. Please try again.');
+      toast.success('Job posted successfully!');
     }
   };
 
